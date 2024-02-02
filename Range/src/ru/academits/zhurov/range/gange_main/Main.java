@@ -17,11 +17,11 @@ public class Main {
             System.out.println("Координата " + coordinate + " не принадлежит диапазону от " + range.getFrom() + " до " + range.getTo());
         }
 
-        System.out.println("Длина диапазона = " + range.getRangeLength());
+        System.out.println("Длина диапазона = " + range.length());
 
         range.setFrom(5);
         range.setTo(20);
 
-        System.out.println("Длина диапазона после изменения = " + range.getRangeLength());
+        System.out.println("Длина диапазона после изменения = " + range.length());
     }
 }
