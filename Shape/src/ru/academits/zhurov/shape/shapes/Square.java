@@ -1,4 +1,4 @@
-package ru.academits.zhurov.shape.shape;
+package ru.academits.zhurov.shape.shapes;
 
 public class Square implements Shape {
     private double length;

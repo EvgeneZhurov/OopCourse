@@ -1,6 +1,6 @@
 package ru.academits.zhurov.shape.shape_main;
 
-import ru.academits.zhurov.shape.shape.*;
+import ru.academits.zhurov.shape.shapes.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
