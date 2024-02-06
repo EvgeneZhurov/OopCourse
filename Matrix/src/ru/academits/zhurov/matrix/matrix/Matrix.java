@@ -1,6 +1,6 @@
 package ru.academits.zhurov.matrix.matrix;
 
-import java.util.Vector;
+import ru.academits.vector.vector.Vector;
 
 public class Matrix {
     //TODO подумать над названием поля.
