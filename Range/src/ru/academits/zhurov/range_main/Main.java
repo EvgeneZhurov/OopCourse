@@ -41,5 +41,13 @@ public class Main {
         } else {
             System.out.println("Объединение интервалов: " + Arrays.toString(union));
         }
+
+        Range[] difference = range1.getDifference(range2);
+
+        if (difference.length == 0) {
+            System.out.println("Разность интервалов: пустое множество");
+        } else {
+            System.out.println("Разность интервалов: " + Arrays.toString(difference));
+        }
     }
 }
