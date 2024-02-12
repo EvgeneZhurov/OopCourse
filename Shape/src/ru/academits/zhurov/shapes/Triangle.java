@@ -1,7 +1,5 @@
 package ru.academits.zhurov.shapes;
 
-import java.util.Objects;
-
 public class Triangle implements Shape {
     private double x1;
     private double y1;
@@ -69,12 +67,12 @@ public class Triangle implements Shape {
 
     @Override
     public double getWidth() {
-        return Math.max(this.x1, Math.max(this.x2, this.x3) - Math.min(this.x1, Math.min(this.x2, this.x3)));
+        return Math.max(x1, Math.max(x2, x3) - Math.min(x1, Math.min(x2, x3)));
     }
 
     @Override
     public double getHeight() {
-        return Math.max(this.y1, Math.max(this.y2, this.y3) - Math.min(this.y1, Math.min(this.y2, this.y3)));
+        return Math.max(y1, Math.max(y2, y3) - Math.min(y1, Math.min(y2, y3)));
     }
 
     @Override
@@ -123,6 +121,11 @@ public class Triangle implements Shape {
         int hash = 1;
 
         hash = prime * hash + Double.hashCode(x1);
+        hash = prime * hash + Double.hashCode(x2);
+        hash = prime * hash + Double.hashCode(x3);
+        hash = prime * hash + Double.hashCode(y1);
+        hash = prime * hash + Double.hashCode(y2);
+        hash = prime * hash + Double.hashCode(y3);
 
         return hash;
     }
