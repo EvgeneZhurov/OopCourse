@@ -2,15 +2,12 @@ package ru.academits.zhurov.shapes.main;
 
 import ru.academits.zhurov.shapes.*;
 
-import java.util.Arrays;
-import java.util.Comparator;
-
 public class Main {
     public static void main(String[] args) {
         Square square1 = new Square(1);
-        Square square2 = new Square(5);
+        Square square2 = new Square(500);
 
-        Triangle triangle1 = new Triangle(0, 3, 0, 0, 0, 4);
+        Triangle triangle1 = new Triangle(0, 3000, 0, 0, 0, 4000);
         Triangle triangle2 = new Triangle(0, 12, 0, 0, 0, 5);
 
         System.out.println("Высота треугольника = " + triangle1.getHeight());
@@ -22,20 +19,29 @@ public class Main {
         Circle circle1 = new Circle(7);
         Circle circle2 = new Circle(5);
 
-        Shape[] shapes = new Shape[]{square1, square2, triangle1, triangle2, rectangle1, rectangle2, circle1, circle2};
+        Shape[] shapes = {square1, square2, triangle1, triangle2, rectangle1, rectangle2, circle1, circle2};
 
-        System.out.println("Максимальная площадь из массива фигур = " + getMaxArea(shapes));
-        System.out.println("Периметр второй по величине фигуры = " + getSecondMaxPerimeter(shapes));
+        if (shapes.length > 0) {
+            System.out.println("Фигура с максимальной площадью: " + getMaxArea(shapes));
+        } else {
+            System.out.println("Нет фигур внутри массива.");
+        }
+
+        if (shapes.length > 1) {
+            System.out.println("Фигура со вторым по максимуму по периметром:  " + getSecondMaxPerimeter(shapes));
+        } else {
+            System.out.println("В массиве меньше двх фигур.");
+        }
         System.out.println(triangle1);
     }
 
-    public static double getMaxArea(Shape[] shapes) {
-        Arrays.sort(shapes, Comparator.comparingDouble(Shape::getArea));
-        return shapes[shapes.length - 1].getArea();
+    public static Shape getMaxArea(Shape[] shapes) {
+        Comparator.comparingArea(shapes);
+        return shapes[shapes.length - 1];
     }
 
-    public static double getSecondMaxPerimeter(Shape[] shapes) {
-        Arrays.sort(shapes, Comparator.comparingDouble(Shape::getPerimeter));
-        return shapes[shapes.length - 2].getArea();
+    public static Shape getSecondMaxPerimeter(Shape[] shapes) {
+        Comparator.comparingPerimeter(shapes);
+        return shapes[shapes.length - 2];
     }
 }

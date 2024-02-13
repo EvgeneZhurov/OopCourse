@@ -1,44 +1,44 @@
 package ru.academits.zhurov.shapes;
 
 public class Square implements Shape {
-    private double length;
+    private double sideLength;
+    final static int SIDES_QUANTITY = 4;
 
     public Square(double length) {
-        this.length = length;
+        this.sideLength = length;
     }
 
-    public double getLength() {
-        return length;
+    public double getSideLength() {
+        return sideLength;
     }
 
-    public void setLength(double length) {
-        this.length = length;
+    public void setSideLength(double length) {
+        this.sideLength = length;
     }
 
     @Override
     public double getWidth() {
-        return this.length;
+        return sideLength;
     }
 
     @Override
     public double getHeight() {
-        return this.length;
+        return sideLength;
     }
 
     @Override
     public double getArea() {
-        return Math.pow(this.length, 2);
+        return sideLength * sideLength;
     }
 
     @Override
     public double getPerimeter() {
-        final int sidesQuantity = 4;
-        return sidesQuantity * this.length;
+        return SIDES_QUANTITY * sideLength;
     }
 
     @Override
     public String toString() {
-        return "Квадрат со стороной: " + length;
+        return "Квадрат со стороной: " + sideLength;
     }
 
     @Override
@@ -52,11 +52,11 @@ public class Square implements Shape {
         }
 
         Square square = (Square) o;
-        return square.length == length;
+        return square.sideLength == sideLength;
     }
 
     @Override
     public int hashCode() {
-        return Double.hashCode(length);
+        return Double.hashCode(sideLength);
     }
 }

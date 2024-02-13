@@ -1,99 +1,99 @@
 package ru.academits.zhurov.shapes;
 
 public class Triangle implements Shape {
-    private double x1;
-    private double y1;
-    private double x2;
-    private double y2;
-    private double x3;
-    private double y3;
+    private double xA;
+    private double yA;
+    private double xB;
+    private double yB;
+    private double xC;
+    private double yC;
 
-    public Triangle(double x1, double x2, double x3, double y1, double y2, double y3) {
-        this.x1 = x1;
-        this.x2 = x2;
-        this.x3 = x3;
-        this.y1 = y1;
-        this.y2 = y2;
-        this.y3 = y3;
+    public Triangle(double xA, double xB, double xC, double yA, double yB, double yC) {
+        this.xA = xA;
+        this.xB = xB;
+        this.xC = xC;
+        this.yA = yA;
+        this.yB = yB;
+        this.yC = yC;
     }
 
-    public double getX1() {
-        return x1;
+    public double getXA() {
+        return xA;
     }
 
-    public void setX1(double x1) {
-        this.x1 = x1;
+    public void setXA(double xA) {
+        this.xA = xA;
     }
 
-    public double getX2() {
-        return x2;
+    public double getXB() {
+        return xB;
     }
 
-    public void setX2(double x2) {
-        this.x2 = x2;
+    public void setXB(double xB) {
+        this.xB = xB;
     }
 
-    public double getX3() {
-        return x3;
+    public double getXC() {
+        return xC;
     }
 
-    public void setX3(double x3) {
-        this.x3 = x3;
+    public void setXC(double xC) {
+        this.xC = xC;
     }
 
-    public double getY1() {
-        return y1;
+    public double getYA() {
+        return yA;
     }
 
-    public void setY1(double y1) {
-        this.y1 = y1;
+    public void setYA(double yA) {
+        this.yA = yA;
     }
 
-    public double getY2() {
-        return y2;
+    public double getYB() {
+        return yB;
     }
 
-    public void setY2(double y2) {
-        this.y2 = y2;
+    public void setYB(double yB) {
+        this.yB = yB;
     }
 
-    public double getY3() {
-        return y3;
+    public double getYC() {
+        return yC;
     }
 
-    public void setY3(double y3) {
-        this.y3 = y3;
+    public void setYC(double yC) {
+        this.yC = yC;
     }
 
     @Override
     public double getWidth() {
-        return Math.max(x1, Math.max(x2, x3) - Math.min(x1, Math.min(x2, x3)));
+        return Math.max(xA, Math.max(xB, xC) - Math.min(xA, Math.min(xB, xC)));
     }
 
     @Override
     public double getHeight() {
-        return Math.max(y1, Math.max(y2, y3) - Math.min(y1, Math.min(y2, y3)));
+        return Math.max(yA, Math.max(yB, yC) - Math.min(yA, Math.min(yB, yC)));
     }
 
     @Override
     public double getArea() {
-        double firstSide = getLength(x1, x2, y1, y2);
-        double secondSide = getLength(x1, x3, y1, y3);
-        double thirdSide = getLength(x2, x3, y2, y3);
+        double side1Length = getLength(xA, xB, yA, yB);
+        double side2Length = getLength(xA, xC, yA, yC);
+        double side3Length = getLength(xB, xC, yB, yC);
 
-        double semiPerimeter = (firstSide + secondSide + thirdSide) / 2;
+        double semiPerimeter = (side1Length + side2Length + side3Length) / 2;
 
-        return Math.sqrt(semiPerimeter * (semiPerimeter - firstSide) * (semiPerimeter - secondSide) * (semiPerimeter - thirdSide));
+        return Math.sqrt(semiPerimeter * (semiPerimeter - side1Length) * (semiPerimeter - side2Length) * (semiPerimeter - side3Length));
     }
 
     @Override
     public double getPerimeter() {
-        return getLength(x1, x2, y1, y2) + getLength(x1, x3, y1, y3) + getLength(x2, x3, y2, y3);
+        return getLength(xA, xB, yA, yB) + getLength(xA, xC, yA, yC) + getLength(xB, xC, yB, yC);
     }
 
     @Override
     public String toString() {
-        return "Треугольник c координатами: (" + x1 + ", " + y1 + ")" + ", " + "(" + x2 + ", " + y2 + ")" + ", " + "(" + x3 + ", " + y3 + ")";
+        return "Треугольник c координатами: (" + xA + ", " + yA + "), (" + xB + ", " + yB + "), (" + xC + ", " + yC + ")";
     }
 
     private static double getLength(double x1, double x2, double y1, double y2) {
@@ -111,8 +111,8 @@ public class Triangle implements Shape {
         }
 
         Triangle triangle = (Triangle) o;
-        return triangle.x1 == x1 && triangle.x2 == x2 && triangle.x3 == x3 &&
-                triangle.y1 == y1 && triangle.y2 == y2 && triangle.y3 == y3;
+        return triangle.xA == xA && triangle.xB == xB && triangle.xC == xC
+                && triangle.yA == yA && triangle.yB == yB && triangle.yC == yC;
     }
 
     @Override
@@ -120,12 +120,12 @@ public class Triangle implements Shape {
         final int prime = 37;
         int hash = 1;
 
-        hash = prime * hash + Double.hashCode(x1);
-        hash = prime * hash + Double.hashCode(x2);
-        hash = prime * hash + Double.hashCode(x3);
-        hash = prime * hash + Double.hashCode(y1);
-        hash = prime * hash + Double.hashCode(y2);
-        hash = prime * hash + Double.hashCode(y3);
+        hash = prime * hash + Double.hashCode(xA);
+        hash = prime * hash + Double.hashCode(xB);
+        hash = prime * hash + Double.hashCode(xC);
+        hash = prime * hash + Double.hashCode(yA);
+        hash = prime * hash + Double.hashCode(yB);
+        hash = prime * hash + Double.hashCode(yC);
 
         return hash;
     }
