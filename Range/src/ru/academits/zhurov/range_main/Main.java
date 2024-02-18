@@ -27,27 +27,12 @@ public class Main {
         System.out.println("Длина диапазона после изменения = " + range1.getLength());
 
         Range range2 = new Range(9, 10);
-
-        try {
-            System.out.println("Пересечение интервалов: " + range1.getIntersection(range2));
-        } catch (NullPointerException e) {
-            System.out.println("Пересечение интервалов: пустое множество");
-        }
+        System.out.println("Пересечение интервалов: " + range1.getIntersection(range2));
 
         Range[] union = range1.getUnion(range2);
-
-        if (union.length == 0) {
-            System.out.println("Объединение интервалов: пустое множество");
-        } else {
-            System.out.println("Объединение интервалов: " + Arrays.toString(union));
-        }
+        System.out.println("Объединение интервалов: " + Arrays.toString(union));
 
         Range[] difference = range1.getDifference(range2);
-
-        if (difference.length == 0) {
-            System.out.println("Разность интервалов: пустое множество");
-        } else {
-            System.out.println("Разность интервалов: " + Arrays.toString(difference));
-        }
+        System.out.println("Разность интервалов: " + Arrays.toString(difference));
     }
 }

@@ -30,10 +30,9 @@ public class Range {
     }
 
     public boolean isInside(double number) {
-        return from <= number && to >= number;
+        return number >= from && number <= to;
     }
 
-    //TODO пункт 7 исправлений
     public Range getIntersection(Range range) {
         if (range.from >= to || range.to <= from) {
             return null;
@@ -44,7 +43,7 @@ public class Range {
 
     public Range[] getUnion(Range range) {
         if (from > range.to || to < range.from) {
-            return new Range[]{new Range(from, to), new Range(range.getFrom(), range.getTo())};
+            return new Range[]{new Range(from, to), new Range(range.from, range.to)};
         }
 
         return new Range[]{new Range(Math.min(from, range.from), Math.max(to, range.to))};
