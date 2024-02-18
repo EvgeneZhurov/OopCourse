@@ -7,16 +7,16 @@ public class Main {
         Vector vector1 = new Vector(new double[]{1, 2, 3, 4});
         Vector vector2 = new Vector(new double[]{1, 2, 3});
 
-        vector1.getSum(vector2);
+        vector1.setSum(vector2);
         System.out.println("Сумма векторов: " + vector1);
 
-        vector2.getDifference(vector1);
+        vector2.setDifference(vector1);
         System.out.println("Разность векторов: " + vector2);
 
-        vector1.getScalarMultiplication(5);
+        vector1.setScalarMultiplication(5);
         System.out.println("Умножение на скаляр: " + vector1);
 
-        vector1.getRevers();
+        vector1.setRevers();
         System.out.println("Разворот вектора: " + vector1);
 
         System.out.println("Длина вектора = " + vector1.getLength());

@@ -98,25 +98,25 @@ public class Vector {
         return true;
     }
 
-    public void getSum(Vector vector) {
+    public void setSum(Vector vector) {
         for (int i = 0; i < Math.min(array.length, vector.getSize()); i++) {
             this.array[i] += vector.array[i];
         }
     }
 
-    public void getDifference(Vector vector) {
+    public void setDifference(Vector vector) {
         for (int i = 0; i < Math.min(array.length, vector.getSize()); i++) {
             array[i] -= vector.array[i];
         }
     }
 
-    public void getScalarMultiplication(double multiplier) {
+    public void setScalarMultiplication(double multiplier) {
         for (int i = 0; i < array.length; i++) {
             array[i] *= multiplier;
         }
     }
 
-    public void getRevers() {
+    public void setRevers() {
         for (int i = 0; i < array.length; i++) {
             array[i] *= -1;
         }
@@ -159,8 +159,8 @@ public class Vector {
     public static Vector getVectorsSum(Vector vector1, Vector vector2) {
         Vector vector = new Vector(Math.max(vector1.getSize(), vector2.getSize()));
 
-        vector.getSum(vector1);
-        vector.getSum(vector2);
+        vector.setSum(vector1);
+        vector.setSum(vector2);
 
         return vector;
     }
@@ -168,8 +168,8 @@ public class Vector {
     public static Vector getVectorsDifference(Vector vector1, Vector vector2) {
         Vector vector = new Vector(Math.max(vector1.getSize(), vector2.getSize()));
 
-        vector.getSum(vector1);
-        vector.getDifference(vector2);
+        vector.setSum(vector1);
+        vector.setDifference(vector2);
 
         return vector;
     }
