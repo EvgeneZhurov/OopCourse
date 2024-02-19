@@ -37,16 +37,16 @@ public class Vector {
         System.arraycopy(array, 0, this.array, 0, array.length);
     }
 
+    public int getSize() {
+        return array.length;
+    }
+
     public double[] getArray() {
         return array;
     }
 
     public void setArray(double[] array) {
         this.array = array;
-    }
-
-    public int getSize() {
-        return array.length;
     }
 
     @Override
