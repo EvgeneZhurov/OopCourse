@@ -5,26 +5,22 @@ import ru.academits.zhurov.matrix.Matrix;
 
 public class Main {
     public static void main(String[] args) {
-
         Matrix matrix = new Matrix(2, 3);
         System.out.println(matrix.getColumnLength());
-        System.out.println(matrix);
-
-        Matrix matrix1 = new Matrix(2, 3);
-        System.out.println(matrix1);
+        System.out.println("Проверка конструктора " + matrix);
 
         double[][] array = {{1, 2, 3}, {4, 5, 6}};
         Matrix matrix2 = new Matrix(array);
-        System.out.println(matrix2);
+        System.out.println("Проверка конструктора " + matrix2);
 
         Vector vector = matrix2.getVectorRow(0);
-        System.out.println(vector);
+        System.out.println("Проверка метода getVectorRow " + vector);
 
         matrix2.setScalarMultiplication(2);
-        System.out.println(matrix2);
+        System.out.println("Проверка метода setScalarMultiplication " + matrix2);
 
         matrix2.setTransposition();
-        System.out.println(matrix2);
+        System.out.println("Проверка метода setTransposition " + matrix2);
 
         double[][] array1 = {{1, 2}, {4, 5}};
         Matrix matrix3 = new Matrix(array1);
@@ -32,7 +28,7 @@ public class Main {
 
         Vector vector4 = new Vector(new double[]{5, 6, 7});
         Vector vector5 = matrix2.getVectorMultiplying(vector4);
-        System.out.println("Умножение матрицы на вектор!!!" + vector5);
+        System.out.println("Умножение матрицы на вектор " + vector5);
 
         double[][] array4 = {{1, 2}, {4, 5}};
         Matrix matrix4 = new Matrix(array4);

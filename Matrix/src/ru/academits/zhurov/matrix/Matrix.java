@@ -52,11 +52,6 @@ public class Matrix {
         return array;
     }
 
-    //TODO нужно подумать, что делать с векторами большей длины
-    public void setArray(Vector[] array) {
-        this.array = array;
-    }
-
     public int getColumnLength() {
         return array.length;
     }
@@ -205,11 +200,15 @@ public class Matrix {
         return determinant;
     }
 
-    //TODO нужна валидация
     public Vector getVectorMultiplying(Vector vector) {
-        Vector vectorMultiplying = new Vector(array[0].getSize());
+        if (vector.getSize() != getColumnLength()) {
+            throw new IllegalArgumentException(" При умножении матрицы на вектор-столбец число столбцов в матрице" +
+                    " должно совпадать с числом строк в векторе-столбце");
+        }
 
-        for (int i = 0; i < array[0].getSize(); i++) {
+        Vector vectorMultiplying = new Vector(getRowLength());
+
+        for (int i = 0; i < getRowLength(); i++) {
             for (int j = 0; j < vector.getSize(); j++) {
                 vectorMultiplying.setComponent(i, vectorMultiplying.getComponent(i)
                         + vector.getComponent(j) * getVectorColumn(i).getComponent(j));
@@ -227,6 +226,7 @@ public class Matrix {
         for (int i = 0; i < matrix.getColumnLength(); i++) {
             Vector row = getVectorRow(i);
             Vector matrixRow = matrix.getVectorRow(i);
+
             row.setSum(matrixRow);
             setVectorRow(i, row);
         }
@@ -291,18 +291,18 @@ public class Matrix {
             throw new IllegalArgumentException("Количество столбцов 1-й матрицы должно быть равно количеству строк 2-й матрицы");
         }
 
-        Matrix multiplication = new Matrix(matrix2.getRowLength(), matrix1.array.length);
+        Matrix multiplication = new Matrix(matrix2.getRowLength(), matrix1.getColumnLength());
 
         for (int i = 0; i < matrix1.getColumnLength(); i++) {
+            Vector multiplicationVector = multiplication.getVectorRow(i);
+
             for (int j = 0; j < matrix2.getRowLength(); j++) {
                 Vector matrix1Row = matrix1.getVectorRow(i);
                 Vector matrix2Column = matrix2.getVectorColumn(j);
-
-                Vector multiplicationVector = multiplication.getVectorRow(i);
                 multiplicationVector.setComponent(j, Vector.getScalarComposition(matrix1Row, matrix2Column));
-
-                multiplication.setVectorRow(i, multiplicationVector);
             }
+
+            multiplication.setVectorRow(i, multiplicationVector);
         }
 
         return multiplication;
