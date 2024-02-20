@@ -1,15 +1,15 @@
-package ru.academits.zhurov.csv.csv;
+package ru.academits.zhurov.csv;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintStream;
 
 public class Csv {
-    public static void main(String[] args) throws FileNotFoundException {
-        try (Scanner scanner = new Scanner(new FileInputStream("C:\\Users\\admin\\IdeaProjects\\OopCourse\\Csv\\src\\ru\\academits\\zhurov\\csv\\input.csv"));
-             PrintWriter writer = new PrintWriter("output.html")) {
+    public static void convertScv(String absolutPath, String fileName) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutPath));
 
+        try (PrintStream writer = new PrintStream("output.html")) {
             writer.println("<!DOCTYPE html>");
             writer.println("<html lang = \"ru\" >");
             writer.println("    <head>");
@@ -18,23 +18,16 @@ public class Csv {
             writer.println("    <body>");
             writer.println("        <table>");
 
-            while (scanner.hasNextLine()) {
-                StringBuilder sb = new StringBuilder();
-                StringBuilder stringBuilder = new StringBuilder();
+            String inputString;
 
-                replaceSpecialCharacters(stringBuilder.append(scanner.nextLine()));
-                sb.append(stringBuilder);
+            while ((inputString = bufferedReader.readLine()) != null) {
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append(inputString);
+
+                formatRow(stringBuilder, writer);
+                replaceSpecialCharacters(stringBuilder);
 
                 stringBuilder.delete(0, stringBuilder.length());
-
-                while (!isAllString(sb)) {
-                    sb.append("<br/>");
-
-                    replaceSpecialCharacters(stringBuilder.append(scanner.nextLine()));
-                    sb.append(stringBuilder);
-                }
-
-                formatRow(sb, writer);
             }
 
             writer.println("        </table>");
@@ -43,7 +36,9 @@ public class Csv {
         }
     }
 
-    public static void formatRow(StringBuilder sb, PrintWriter writer) {
+    public static void formatRow(StringBuilder sb, PrintStream writer) {
+        boolean isAllString = isAllString(sb);
+
         writer.println("          <tr>");
 
         while (sb.length() > 0) {
@@ -56,10 +51,10 @@ public class Csv {
                 deleteCharacters(stringBuilder);
             }
 
-            writer.println("        <td>" + stringBuilder + "</td>");
+            writer.println("               <td>" + stringBuilder + "</td>");
 
             if (sb.length() == 1 && sb.charAt(0) == ',') {
-                writer.println("        <td></td>");
+                writer.println("           <td></td>");
                 sb.delete(0, 1);
                 break;
             }
@@ -67,9 +62,12 @@ public class Csv {
             if (sb.length() > 0) {
                 sb.delete(0, 1);
             }
-        }
 
-        writer.println("           </tr>");
+/*            if (!isAllString) {
+                sb.delete(sb.length() - 6,sb.length() - 1);
+
+            }*/
+        }
     }
 
     public static int getLength(StringBuilder sb) {

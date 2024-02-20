@@ -1,14 +1,18 @@
-package ru.academits.zhurov.csv.csv_main;
+package ru.academits.zhurov.csv_main;
+
+import ru.academits.zhurov.csv.Csv;
+
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
-
-        //TODO сделать статический метод в классе CSV, который нужно вызвать в Main.
+    public static void main(String[] args) throws IOException {
+        String fileName = "output.html";
+        String absolutPath = "C:\\Users\\admin\\IdeaProjects\\OopCourse\\Csv\\src\\ru\\academits\\zhurov\\input.csv";
+        Csv.convertScv(absolutPath, fileName);
+    }
+}
     /*
-        3. При чтении строк из файла вместо Scanner лучше использовать BufferedReader от FileReader.
-        Это работает быстрее
-
-        4. stringBuilder, sb - неинформативная пара имен, по этим именам не понятно чем отличаются переменные
+      4. stringBuilder, sb - неинформативная пара имен, по этим именам не понятно чем отличаются переменные
 
         7. isAllString - неинформативное имя
 
@@ -20,5 +24,3 @@ public class Main {
 
         11. Должен создаваться корректный html-документ, содержащий doctype, head, body, meta с кодировкой
         */
-    }
-}
