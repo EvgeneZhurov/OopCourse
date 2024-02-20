@@ -1,6 +1,6 @@
 package ru.academits.zhurov.matrix_main;
 
-import ru.academits.vector.Vector;
+import ru.academits.zhurov.vector.Vector;
 import ru.academits.zhurov.matrix.Matrix;
 
 public class Main {

@@ -1,4 +1,4 @@
-package ru.academits.vector;
+package ru.academits.zhurov.vector;
 
 import java.util.Arrays;
 

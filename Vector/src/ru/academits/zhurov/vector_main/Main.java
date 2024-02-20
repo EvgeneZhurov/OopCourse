@@ -1,6 +1,6 @@
-package ru.academits.vector.main;
+package ru.academits.zhurov.vector_main;
 
-import ru.academits.vector.Vector;
+import ru.academits.zhurov.vector.Vector;
 
 public class Main {
     public static void main(String[] args) {

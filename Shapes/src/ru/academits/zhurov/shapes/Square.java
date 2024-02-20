@@ -4,16 +4,16 @@ public class Square implements Shape {
     private double sideLength;
     final static int SIDES_QUANTITY = 4;
 
-    public Square(double length) {
-        this.sideLength = length;
+    public Square(double sideLength) {
+        this.sideLength = sideLength;
     }
 
     public double getSideLength() {
         return sideLength;
     }
 
-    public void setSideLength(double length) {
-        this.sideLength = length;
+    public void setSideLength(double sideLength) {
+        this.sideLength = sideLength;
     }
 
     @Override

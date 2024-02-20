@@ -8,12 +8,12 @@ public class Triangle implements Shape {
     private double xC;
     private double yC;
 
-    public Triangle(double xA, double xB, double xC, double yA, double yB, double yC) {
+    public Triangle(double xA, double yA, double xB, double yB, double xC, double yC) {
         this.xA = xA;
-        this.xB = xB;
-        this.xC = xC;
         this.yA = yA;
+        this.xB = xB;
         this.yB = yB;
+        this.xC = xC;
         this.yC = yC;
     }
 
@@ -77,9 +77,9 @@ public class Triangle implements Shape {
 
     @Override
     public double getArea() {
-        double side1Length = getLength(xA, xB, yA, yB);
-        double side2Length = getLength(xA, xC, yA, yC);
-        double side3Length = getLength(xB, xC, yB, yC);
+        double side1Length = getLength(xA, yA, xB, yB);
+        double side2Length = getLength(xA, yA, xC, yC);
+        double side3Length = getLength(xB, yB, xC, yC);
 
         double semiPerimeter = (side1Length + side2Length + side3Length) / 2;
 
@@ -88,7 +88,7 @@ public class Triangle implements Shape {
 
     @Override
     public double getPerimeter() {
-        return getLength(xA, xB, yA, yB) + getLength(xA, xC, yA, yC) + getLength(xB, xC, yB, yC);
+        return getLength(xA, yA, xB, yB) + getLength(xA, yA, xC, yC) + getLength(xB, yB, xC, yC);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class Triangle implements Shape {
         return "Треугольник c координатами: (" + xA + ", " + yA + "), (" + xB + ", " + yB + "), (" + xC + ", " + yC + ")";
     }
 
-    private static double getLength(double x1, double x2, double y1, double y2) {
+    private static double getLength(double x1, double y1, double x2, double y2) {
         return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 
@@ -111,8 +111,7 @@ public class Triangle implements Shape {
         }
 
         Triangle triangle = (Triangle) o;
-        return triangle.xA == xA && triangle.xB == xB && triangle.xC == xC
-                && triangle.yA == yA && triangle.yB == yB && triangle.yC == yC;
+        return triangle.xA == xA && triangle.xB == xB && triangle.xC == xC && triangle.yA == yA && triangle.yB == yB && triangle.yC == yC;
     }
 
     @Override

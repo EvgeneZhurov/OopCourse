@@ -1,6 +1,6 @@
 package ru.academits.zhurov.matrix;
 
-import ru.academits.vector.Vector;
+import ru.academits.zhurov.vector.Vector;
 
 import java.util.Arrays;
 
