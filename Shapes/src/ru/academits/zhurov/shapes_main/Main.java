@@ -1,7 +1,6 @@
 package ru.academits.zhurov.shapes_main;
 
 import ru.academits.zhurov.shapes.*;
-import ru.academits.zhurov.shapes.shapes.*;
 
 public class Main {
     public static void main(String[] args) {
