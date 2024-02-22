@@ -54,7 +54,7 @@ public class Main {
 
     public static Shape getSecondMaxPerimeterShape(Shape[] shapes) throws IOException {
         if (shapes.length < 2) {
-            throw new IOException("В массиве меньше двх фигур.");
+            throw new IOException("В массиве меньше двух фигур.");
         }
 
         Comparator<Shape> perimeterComparator = new PerimeterComparator();
