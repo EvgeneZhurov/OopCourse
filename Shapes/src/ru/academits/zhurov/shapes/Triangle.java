@@ -25,22 +25,6 @@ public class Triangle implements Shape {
         this.xA = xA;
     }
 
-    public double getXB() {
-        return xB;
-    }
-
-    public void setXB(double xB) {
-        this.xB = xB;
-    }
-
-    public double getXC() {
-        return xC;
-    }
-
-    public void setXC(double xC) {
-        this.xC = xC;
-    }
-
     public double getYA() {
         return yA;
     }
@@ -49,12 +33,28 @@ public class Triangle implements Shape {
         this.yA = yA;
     }
 
+    public double getXB() {
+        return xB;
+    }
+
+    public void setXB(double xB) {
+        this.xB = xB;
+    }
+
     public double getYB() {
         return yB;
     }
 
     public void setYB(double yB) {
         this.yB = yB;
+    }
+
+    public double getXC() {
+        return xC;
+    }
+
+    public void setXC(double xC) {
+        this.xC = xC;
     }
 
     public double getYC() {
