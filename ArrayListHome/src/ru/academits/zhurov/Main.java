@@ -11,8 +11,7 @@ public class Main {
     public static void main(String[] args) {
         List<String> fileReader = new ArrayList<>();
 
-        String path = "ArrayListHome/src/ru/academits/zhurov/input.html";
-        try (Scanner scanner = new Scanner(new File(path))) {
+        try (Scanner scanner = new Scanner(new File("ArrayListHome/src/ru/academits/zhurov/input.html"))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 fileReader.add(line);
