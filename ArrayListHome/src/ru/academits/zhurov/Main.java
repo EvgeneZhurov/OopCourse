@@ -13,8 +13,7 @@ public class Main {
 
         try (Scanner scanner = new Scanner(new File("ArrayListHome/src/ru/academits/zhurov/input.html"))) {
             while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                fileReader.add(line);
+                fileReader.add(scanner.nextLine());
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
