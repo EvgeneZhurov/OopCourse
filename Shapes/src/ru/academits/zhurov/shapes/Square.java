@@ -2,7 +2,7 @@ package ru.academits.zhurov.shapes;
 
 public class Square implements Shape {
     private double sideLength;
-    final static int SIDES_QUANTITY = 4;
+    final public int SIDES_QUANTITY = 4;
 
     public Square(double sideLength) {
         this.sideLength = sideLength;
