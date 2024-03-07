@@ -1,14 +1,13 @@
 package ru.academits.zhurov.shapes_main;
 
-import ru.academits.zhurov.comparators.ShapeAreaComparator;
-import ru.academits.zhurov.comparators.ShapePerimeterComparator;
 import ru.academits.zhurov.shapes.*;
+import ru.academits.zhurov.shapes.comparators.ShapeAreaComparator;
+import ru.academits.zhurov.shapes.comparators.ShapePerimeterComparator;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Square square1 = new Square(1);
         Square square2 = new Square(500);
 
@@ -34,9 +33,6 @@ public class Main {
         System.out.println(Arrays.toString(shapes));
 
         System.out.println("Фигура со вторым по максимуму периметром:  " + getSecondMaxPerimeterShape(shapes));
-
-        Arrays.sort(shapes, new ShapePerimeterComparator());
-        System.out.println(Arrays.toString(shapes));
     }
 
     public static Shape getMaxAreaShape(Shape[] shapes) {
@@ -50,7 +46,7 @@ public class Main {
 
     public static Shape getSecondMaxPerimeterShape(Shape[] shapes) {
         if (shapes.length < 2) {
-            throw new IllegalArgumentException("В массиве меньше двух фигур.");
+            throw new IllegalArgumentException("В массиве меньше двух фигур");
         }
 
         Arrays.sort(shapes, new ShapePerimeterComparator());

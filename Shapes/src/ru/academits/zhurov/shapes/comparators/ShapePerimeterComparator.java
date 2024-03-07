@@ -1,4 +1,4 @@
-package ru.academits.zhurov.comparators;
+package ru.academits.zhurov.shapes.comparators;
 
 import ru.academits.zhurov.shapes.Shape;
 
