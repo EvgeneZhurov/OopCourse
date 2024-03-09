@@ -7,9 +7,7 @@ import static ru.academits.zhurov.arrayListHome.ArrayListHome.*;
 
 public class Main {
     public static void main(String[] args) {
-        String pathName = "ArrayListHome/src/ru/academits/zhurov/arrayListHome/input.html";
-        List<String> fileStringsList = splitFileStringsList(pathName);
-
+        List<String> fileStringsList = splitFileStringsList("ArrayListHome/src/ru/academits/zhurov/arrayListHome/input.html");
         System.out.println("Список строк, прочитанный из файла: " + fileStringsList);
 
         List<Integer> randomNumbersList = new ArrayList<>();
