@@ -20,9 +20,12 @@ public class Main {
         vector1.multiplyByScalar(5);
         System.out.println("Умножение на скаляр: " + vector1);
 
-        vector1.revers();
+        vector1.reverse();
         System.out.println("Разворот вектора: " + vector1);
 
         System.out.println("Длина вектора = " + vector1.getLength());
+
+        System.out.println(vector1.getComponent(-1));
     }
 }
+

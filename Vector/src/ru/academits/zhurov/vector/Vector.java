@@ -98,7 +98,7 @@ public class Vector {
         }
     }
 
-    public void revers() {
+    public void reverse() {
         multiplyByScalar(-1);
     }
 
@@ -114,8 +114,8 @@ public class Vector {
 
     public double getComponent(int index) {
         if (index < 0 || index >= components.length) {
-            throw new IllegalArgumentException("Некорректный индекс. Возможные значения индекса: от 0 до "
-                    + (components.length - 1) + " .Передано: " + index);
+            throw new IndexOutOfBoundsException("Некорректный индекс. Возможные значения индекса: от 0 до "
+                    + (components.length - 1) + ". Передано: " + index);
         }
 
         return components[index];
@@ -123,8 +123,8 @@ public class Vector {
 
     public void setComponent(int index, double value) {
         if (index < 0 || index >= components.length) {
-            throw new IllegalArgumentException("Некорректный индекс. Возможные значения индекса: от 0 до "
-                    + (components.length - 1) + " .Передано: " + index);
+            throw new IndexOutOfBoundsException("Некорректный индекс. Возможные значения индекса: от 0 до "
+                    + (components.length - 1) + ". Передано: " + index);
         }
 
         components[index] = value;
@@ -149,9 +149,9 @@ public class Vector {
     public static double getScalarProduct(Vector vector1, Vector vector2) {
         double scalarProduct = 0;
 
-        int minComponentsSize = Math.min(vector1.components.length, vector2.components.length);
+        int minSize = Math.min(vector1.components.length, vector2.components.length);
 
-        for (int i = 0; i < minComponentsSize; i++) {
+        for (int i = 0; i < minSize; i++) {
             scalarProduct += vector1.components[i] * vector2.components[i];
         }
 
