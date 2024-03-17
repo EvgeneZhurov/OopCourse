@@ -5,116 +5,145 @@ import ru.academits.zhurov.vector.Vector;
 import java.util.Arrays;
 
 public class Matrix {
-    private Vector[] array;
+    private Vector[] strings;
 
-    public Matrix(int row, int column) {
-        Vector vector = new Vector(new double[row]);
-        Vector[] vectors = new Vector[column];
+    public Matrix(int stringsQuantity, int rowsQuantity) {
+        if (rowsQuantity < 1) {
+            throw new IndexOutOfBoundsException("Некорректное значение строки. Всего "
+                    + getRowsQuantity() + " строк. Введено: " + rowsQuantity);
+        }
 
-        for (int i = 0; i < column; i++) {
+        if (stringsQuantity < 1) {
+            throw new IndexOutOfBoundsException("Некорректное значение столбца. Всего "
+                    + getStringsQuantity() + " столбцов. Введено: " + stringsQuantity);
+        }
+
+        Vector vector = new Vector(new double[rowsQuantity]);
+        Vector[] vectors = new Vector[stringsQuantity];
+
+        for (int i = 0; i < stringsQuantity; i++) {
             vectors[i] = vector;
         }
 
-        array = vectors;
+        strings = vectors;
     }
 
     public Matrix(Matrix matrix) {
-        array = matrix.array;
+        strings = matrix.strings;
     }
 
+    //TODO метод работает некорректно
+    // протестировать
     public Matrix(double[][] array) {
-        int column = array.length;
-        int row = array[0].length;
-
-        for (double[] doubles : array) {
-            row = Math.max(row, doubles.length);
+        if (array[0].length < 1) {
+            throw new IndexOutOfBoundsException("Некорректное значение строки. Введено: " + array[0].length);
         }
 
-        Matrix matrix = new Matrix(row, column);
-        this.array = matrix.array;
+        int stringsQuantity = array.length;
+        int rowsQuantity = array[0].length;
+
+        for (double[] row : array) {
+            rowsQuantity = Math.max(rowsQuantity, row.length);
+        }
+
+        Matrix matrix = new Matrix(rowsQuantity, stringsQuantity);
+        this.strings = matrix.strings;
 
         for (int i = 0; i < array.length; i++) {
-            Vector vector = new Vector(row);
+            Vector vector = new Vector(rowsQuantity);
 
             for (int j = 0; j < array[i].length; j++) {
                 vector.setComponent(j, array[i][j]);
             }
 
-            setVectorRow(i, vector);
+            setRow(i, vector);
         }
     }
 
-    public Matrix(Vector[] array) {
-        this.array = array;
+    public Matrix(Vector[] strings) {
+        this.strings = strings;
     }
 
-    public Vector[] getArray() {
-        return array;
+    public Vector[] getStrings() {
+        return strings;
     }
 
-    public int getColumnLength() {
-        return array.length;
+    public int getStringsQuantity() {
+        return strings.length;
     }
 
-    public int getRowLength() {
-        return array[0].getSize();
+    public int getRowsQuantity() {
+        return strings[0].getSize();
     }
 
-    public void setVectorRow(int column, Vector vector) throws IllegalArgumentException {
-        if (column < 0) {
-            throw new IllegalArgumentException("Столбец должен быть неотрицательной величиной");
+    public void setRow(int stringNumber, Vector vector) {
+        if (stringNumber < 0 || stringNumber > getStringsQuantity()) {
+            throw new IndexOutOfBoundsException("Некорректное значение столбца. Всего "
+                    + getStringsQuantity() + " столбцов. Введено: " + stringNumber);
         }
 
-        if (column > getRowLength()) {
-            throw new IllegalArgumentException("Введенное значение превышает количество столбцов");
-        }
-
-        array[column] = vector;
+        strings[stringNumber] = vector;
     }
 
-    public Vector getVectorRow(int column) throws IllegalArgumentException {
-        if (column < 0) {
-            throw new IllegalArgumentException("Столбец должен быть неотрицательной величиной");
+    public Vector getRow(int stringNumber) {
+        if (stringNumber < 0 || stringNumber > getStringsQuantity()) {
+            throw new IndexOutOfBoundsException("Некорректное значение столбца. Всего "
+                    + getStringsQuantity() + " столбцов. Введено: " + stringNumber);
         }
 
-        if (column > getRowLength()) {
-            throw new IllegalArgumentException("Введенное значение превышает количество столбцов");
-        }
-
-        return new Vector(array[column]);
+        return new Vector(strings[stringNumber]);
     }
 
-    public Vector getVectorColumn(int column) throws IllegalArgumentException {
-        if (column < 0) {
-            throw new IllegalArgumentException("Столбец должен быть неотрицательной величиной");
+    public Vector getString(int stringNumber) {
+        if (stringNumber < 0 || stringNumber > getStringsQuantity()) {
+            throw new IndexOutOfBoundsException("Некорректное значение столбца. Всего "
+                    + getStringsQuantity() + " столбцов. Введено: " + stringNumber);
         }
 
-        if (column > getRowLength()) {
-            throw new IllegalArgumentException("Введенное значение превышает количество столбцов");
-        }
+        Vector vector = new Vector(strings.length);
 
-        Vector vector = new Vector(array.length);
-
-        for (int i = 0; i < array.length; i++) {
-            vector.setComponent(i, array[i].getComponent(column));
+        for (int i = 0; i < strings.length; i++) {
+            vector.setComponent(i, strings[i].getComponent(stringNumber));
         }
 
         return vector;
     }
 
     public void setTransposition() {
-        Matrix transposition = new Matrix(array.length, getRowLength());
+        Matrix transposition = new Matrix(strings.length, getRowsQuantity());
 
-        for (int i = 0; i < transposition.array.length; i++) {
-            transposition.setVectorRow(i, getVectorColumn(i));
+        for (int i = 0; i < transposition.strings.length; i++) {
+            transposition.setRow(i, getString(i));
         }
 
-        array = transposition.array;
+        strings = transposition.strings;
     }
 
     @Override
+    //TODO доделать
+       /*15. toString:
+            - по заданию список элементов матрицы нужно печатать в фигурных скобках
+        - нужно сделать полностью самим через StringBuilder*/
     public String toString() {
-        return Arrays.toString(array);
+    /*    StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append('{');
+
+        for (int i = 0; i < strings.length; i++) {
+            stringBuilder.append('{');
+
+            for (int j = 0; j < strings[0].getSize(); j++) {
+                stringBuilder.append(strings[i].getComponent(j));
+            }
+
+            stringBuilder.append('{');
+        }
+
+        stringBuilder.append('}');
+
+        return String.valueOf(stringBuilder);
+*/
+        return Arrays.toString(strings);
     }
 
     @Override
@@ -129,12 +158,12 @@ public class Matrix {
 
         Matrix matrix = (Matrix) o;
 
-        if (matrix.array.length != array.length) {
+        if (matrix.strings.length != strings.length) {
             return false;
         }
 
-        for (int i = 0; i < matrix.array.length; i++) {
-            if (!array[i].equals(matrix.array[i])) {
+        for (int i = 0; i < matrix.strings.length; i++) {
+            if (!strings[i].equals(matrix.strings[i])) {
                 return false;
             }
         }
@@ -144,29 +173,29 @@ public class Matrix {
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(array);
+        return Arrays.hashCode(strings);
     }
 
     public void setScalarMultiplication(double multiplier) {
-        for (Vector vector : array) {
-            vector.setScalarMultiplication(multiplier);
+        for (Vector vector : strings) {
+            vector.multiplyByScalar(multiplier);
         }
     }
 
-    public double getDeterminant() throws IllegalArgumentException {
-        if (!isSquareMatrix()) {
-            throw new IllegalArgumentException(" Определитель считается только у квадратных матриц при наличии чисел.");
+    public double getDeterminant() {
+        if (!isSquare()) {
+            throw new IndexOutOfBoundsException(" Определитель считается только у квадратных матриц при наличии чисел");
         }
 
-        if (array.length == 1) {
-            return getVectorColumn(0).getComponent(0);
+        if (strings.length == 1) {
+            return getString(0).getComponent(0);
         }
 
-        double[][] matrix1 = new double[array.length][array.length];
+        double[][] matrix1 = new double[strings.length][strings.length];
 
         for (int i = 0; i < matrix1.length; i++) {
             for (int j = 0; j < matrix1.length; j++) {
-                matrix1[j][i] = getVectorRow(j).getComponent(i);
+                matrix1[j][i] = getRow(j).getComponent(i);
             }
         }
 
@@ -201,114 +230,118 @@ public class Matrix {
     }
 
     public Vector getVectorMultiplying(Vector vector) {
-        if (vector.getSize() != getColumnLength()) {
-            throw new IllegalArgumentException(" При умножении матрицы на вектор-столбец число столбцов в матрице" +
-                    " должно совпадать с числом строк в векторе-столбце");
+        if (vector.getSize() != getStringsQuantity()) {
+            throw new IndexOutOfBoundsException(" При умножении матрицы на вектор-столбец число столбцов в матрице"
+                    + " должно совпадать с числом строк в векторе-столбце. Количество столбцов в марице: "
+                    + getStringsQuantity() + " .Количество строк в векторе-столбце: " + vector.getSize());
         }
 
-        Vector vectorMultiplying = new Vector(getRowLength());
+        Vector vectorMultiplying = new Vector(getRowsQuantity());
 
-        for (int i = 0; i < getRowLength(); i++) {
+        for (int i = 0; i < getRowsQuantity(); i++) {
             for (int j = 0; j < vector.getSize(); j++) {
                 vectorMultiplying.setComponent(i, vectorMultiplying.getComponent(i)
-                        + vector.getComponent(j) * getVectorColumn(i).getComponent(j));
+                        + vector.getComponent(j) * getString(i).getComponent(j));
             }
         }
 
         return vectorMultiplying;
     }
 
-    public void setMatrixSum(Matrix matrix) throws IllegalArgumentException {
-        if (array.length != matrix.getColumnLength() || getRowLength() != matrix.getRowLength()) {
-            throw new IllegalArgumentException("Складывать можно только матрицы с одинаковыми длинами строк или столбцов");
+    public void addSum(Matrix matrix) {
+        if (strings.length != matrix.getStringsQuantity() || getRowsQuantity() != matrix.getRowsQuantity()) {
+            throw new IndexOutOfBoundsException("Складывать можно только матрицы с одинаковыми длинами строк или столбцов. Количество строк в матрице: "
+                    + strings.length + " .Количество строк в матрице, вводимой в метод в качестве аргумента :");
         }
 
-        for (int i = 0; i < matrix.getColumnLength(); i++) {
-            Vector row = getVectorRow(i);
-            Vector matrixRow = matrix.getVectorRow(i);
+        for (int i = 0; i < strings.length; i++) {
+            Vector row = getRow(i);
+            Vector matrixRow = matrix.getRow(i);
 
-            row.setSum(matrixRow);
-            setVectorRow(i, row);
-        }
-    }
-
-    public void setMatrixSubtraction(Matrix matrix) throws IllegalArgumentException {
-        if (array.length != matrix.getColumnLength() || getRowLength() != matrix.getRowLength()) {
-            throw new IllegalArgumentException("Вычитать можно только тогда, когда матрицы совпадают по длинам строк или столбцов");
-        }
-
-        for (int i = 0; i < matrix.getColumnLength(); i++) {
-            Vector row = getVectorRow(i);
-            Vector matrixRow = matrix.getVectorRow(i);
-
-            matrixRow.setRevers();
-
-            row.setSum(matrixRow);
-            setVectorRow(i, row);
+            row.add(matrixRow);
+            setRow(i, row);
         }
     }
 
-    public static Matrix getMatrixSum(Matrix matrix1, Matrix matrix2) throws IllegalArgumentException {
-        if (matrix1.getColumnLength() != matrix2.getColumnLength() || matrix1.getRowLength() != matrix2.getRowLength()) {
-            throw new IllegalArgumentException("Складывать можно только матрицы с одинаковыми длинами строк или столбцов");
+    public void setMatrixSubtraction(Matrix matrix) {
+        if (strings.length != matrix.getStringsQuantity() || getRowsQuantity() != matrix.getRowsQuantity()) {
+            throw new IndexOutOfBoundsException("Вычитать можно только тогда, когда матрицы совпадают по длинам строк или столбцов");
+        }
+
+        for (int i = 0; i < matrix.getStringsQuantity(); i++) {
+            Vector row = getRow(i);
+            Vector matrixRow = matrix.getRow(i);
+
+            matrixRow.reverse();
+
+            row.add(matrixRow);
+            setRow(i, row);
+        }
+    }
+
+    public static Matrix getMatrixSum(Matrix matrix1, Matrix matrix2) {
+        if (matrix1.getStringsQuantity() != matrix2.getStringsQuantity() || matrix1.getRowsQuantity() != matrix2.getRowsQuantity()) {
+            throw new IndexOutOfBoundsException("Складывать можно только матрицы с одинаковыми длинами строк или столбцов");
         }
 
         Matrix matrixSubtraction = new Matrix(matrix1);
 
-        for (int i = 0; i < matrix1.getColumnLength(); i++) {
-            Vector rowMatrixSubtraction = matrixSubtraction.getVectorRow(i);
-            Vector matrix2Row = matrix2.getVectorRow(i);
+        for (int i = 0; i < matrix1.getStringsQuantity(); i++) {
+            Vector rowMatrixSubtraction = matrixSubtraction.getRow(i);
+            Vector matrix2Row = matrix2.getRow(i);
 
-            rowMatrixSubtraction.setSum(matrix2Row);
-            matrixSubtraction.setVectorRow(i, rowMatrixSubtraction);
+            rowMatrixSubtraction.add(matrix2Row);
+            matrixSubtraction.setRow(i, rowMatrixSubtraction);
         }
 
         return matrixSubtraction;
     }
 
-    public static Matrix getMatrixSubtraction(Matrix matrix1, Matrix matrix2) throws IllegalArgumentException {
-        if (matrix1.getColumnLength() != matrix2.getColumnLength() || matrix1.getRowLength() != matrix2.getRowLength()) {
-            throw new IllegalArgumentException("Вычитать можно только тогда, когда матрицы совпадают по длинам строк или столбцов");
+    public static Matrix getMatrixSubtraction(Matrix matrix1, Matrix matrix2) {
+        if (matrix1.getStringsQuantity() != matrix2.getStringsQuantity() || matrix1.getRowsQuantity() != matrix2.getRowsQuantity()) {
+            throw new IndexOutOfBoundsException("Вычитать можно только тогда, когда матрицы совпадают по длинам строк или столбцов. Введено строк 1 матрицы: "
+                    + matrix1.getStringsQuantity() + "Введено строк 2 матрицы: " + matrix2.getStringsQuantity()
+                    + "Введено столбцов 1 матрицы:" + matrix1.getRowsQuantity() + "Введено столбцов 2 матрицы:" + matrix2.getRowsQuantity());
         }
 
         Matrix subtraction = new Matrix(matrix1);
 
-        for (int i = 0; i < matrix1.getColumnLength(); i++) {
-            Vector subtractionRow = subtraction.getVectorRow(i);
-            Vector matrix2Row = matrix2.getVectorRow(i);
+        for (int i = 0; i < matrix1.getStringsQuantity(); i++) {
+            Vector subtractionRow = subtraction.getRow(i);
+            Vector matrix2Row = matrix2.getRow(i);
 
-            matrix2Row.setRevers();
+            matrix2Row.reverse();
 
-            subtractionRow.setSum(matrix2Row);
-            subtraction.setVectorRow(i, subtractionRow);
+            subtractionRow.add(matrix2Row);
+            subtraction.setRow(i, subtractionRow);
         }
 
         return subtraction;
     }
 
-    public static Matrix getMatrixMultiplication(Matrix matrix1, Matrix matrix2) {
-        if (matrix1.getRowLength() != matrix2.getColumnLength()) {
-            throw new IllegalArgumentException("Количество столбцов 1-й матрицы должно быть равно количеству строк 2-й матрицы");
+    public static Matrix getComposition(Matrix matrix1, Matrix matrix2) {
+        if (matrix1.getStringsQuantity() != matrix2.getStringsQuantity() || matrix1.getRowsQuantity() != matrix2.getRowsQuantity()) {
+            throw new IndexOutOfBoundsException("Вычитать можно только тогда, когда матрицы совпадают по длинам строк или столбцов. Введено строк 1 матрицы: "
+                    + matrix1.getStringsQuantity() + "Введено строк 2 матрицы: " + matrix2.getStringsQuantity()
+                    + "Введено столбцов 1 матрицы:" + matrix1.getRowsQuantity() + "Введено столбцов 2 матрицы:" + matrix2.getRowsQuantity());
         }
 
-        Matrix multiplication = new Matrix(matrix2.getRowLength(), matrix1.getColumnLength());
+        Matrix composition = new Matrix(matrix2.getRowsQuantity(), matrix1.getStringsQuantity());
 
-        for (int i = 0; i < matrix1.getColumnLength(); i++) {
-            Vector multiplicationVector = multiplication.getVectorRow(i);
+        for (int i = 0; i < matrix1.getStringsQuantity(); i++) {
+            Vector compositionVector = composition.getRow(i);
 
-            for (int j = 0; j < matrix2.getRowLength(); j++) {
-                Vector matrix1Row = matrix1.getVectorRow(i);
-                Vector matrix2Column = matrix2.getVectorColumn(j);
-                multiplicationVector.setComponent(j, Vector.getScalarComposition(matrix1Row, matrix2Column));
+            for (int j = 0; j < matrix2.getRowsQuantity(); j++) {
+                compositionVector.setComponent(j, Vector.getScalarProduct(matrix1.getRow(i), matrix2.getString(j)));
             }
 
-            multiplication.setVectorRow(i, multiplicationVector);
+            composition.setRow(i, compositionVector);
         }
 
-        return multiplication;
+        return composition;
     }
 
-    public boolean isSquareMatrix() {
-        return getColumnLength() == getRowLength();
+    public boolean isSquare() {
+        return getStringsQuantity() == getRowsQuantity();
     }
 }
