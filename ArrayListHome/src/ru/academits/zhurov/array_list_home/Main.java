@@ -10,18 +10,13 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        List<String> fileLinesList = null;
-
         try {
-            fileLinesList = getFileLines("ArrayListHome/src/ru/academits/zhurov/array_list_home/input.html");
+            List<String> fileLines = getFileLines("ArrayListHome/src/ru/academits/zhurov/array_list_home/input.html");
+            System.out.println("Список строк, прочитанный из файла: " + fileLines);
         } catch (FileNotFoundException e) {
             System.out.println("Файл не найден");
         } catch (IOException e) {
-            System.out.println("Ошибка при чтении файла");
-        }
-
-        if (fileLinesList != null) {
-            System.out.println("Список строк, прочитанный из файла: " + fileLinesList);
+            System.out.println(e + "Ошибка при чтении файла");
         }
 
         List<Integer> randomNumbers = new ArrayList<>();
@@ -41,8 +36,9 @@ public class Main {
         integers.add(3);
         integers.add(5);
 
-        List<Integer> withoutDuplicatesIntegers = getListWithoutDuplicates(integers);
-        System.out.println("Список без дублей: " + withoutDuplicatesIntegers);
+        System.out.println("Список: " + integers);
+        List<Integer> integersWithoutDuplicates = getListWithoutDuplicates(integers);
+        System.out.println("Список без дублей: " + integersWithoutDuplicates);
     }
 
     public static List<String> getFileLines(String fileName) throws IOException {
@@ -70,14 +66,23 @@ public class Main {
     }
 
     public static <E> List<E> getListWithoutDuplicates(List<E> list) {
-        List<E> withoutDuplicates = new ArrayList<>(list.size());
+        List<E> listWithoutDuplicates = new ArrayList<>(list.size());
 
         for (E item : list) {
-            if (!withoutDuplicates.contains(item)) {
-                withoutDuplicates.add(item);
+            if (!listWithoutDuplicates.contains(item)) {
+                listWithoutDuplicates.add(item);
             }
         }
 
-        return withoutDuplicates;
+        return listWithoutDuplicates;
     }
 }
+
+/*
+        5. При работе с файлами нужно использовать try with resources.
+        Сейчас bufferedReader не закроется в случае ошибки
+
+        8. Сейчас в репозитории не хватает файла .iml, который должен быть в корне проекта.
+        Из-за этого проект в IDEA отображается неправильно
+*/
+
