@@ -44,14 +44,13 @@ public class Main {
     public static List<String> getFileLines(String fileName) throws IOException {
         List<String> fileLinesList = new ArrayList<>();
 
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
-        String fileLine;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+            String fileLine;
 
-        while ((fileLine = bufferedReader.readLine()) != null) {
-            fileLinesList.add(fileLine);
+            while ((fileLine = bufferedReader.readLine()) != null) {
+                fileLinesList.add(fileLine);
+            }
         }
-
-        bufferedReader.close();
 
         return fileLinesList;
     }
@@ -79,9 +78,6 @@ public class Main {
 }
 
 /*
-        5. При работе с файлами нужно использовать try with resources.
-        Сейчас bufferedReader не закроется в случае ошибки
-
         8. Сейчас в репозитории не хватает файла .iml, который должен быть в корне проекта.
         Из-за этого проект в IDEA отображается неправильно
 */
